@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<body onload="loadDoc()">
+    <h2>Doctor Information</h2><hr>
+    
+        Doctor ID: <p id="D_ID"></p><hr>
+        Doctor Name:<p id="DName"></p><hr>
+        Doctor Phone:<p id="DPhone"></p><hr>
+        Doctor Degree: <p id="Degree"></p><hr>
+    <script>
+        function loadDoc(){
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200){
+                    var obj_arr = JSON.parse(this.responseText);
+                    document.getElementById("D_ID").innerHTML = obj_arr[0].D_ID;
+                    document.getElementById("DName").innerHTML = obj_arr[0].DName;
+                    document.getElementById("DPhone").innerHTML = obj_arr[0].DPhone;
+                    document.getElementById("Degree").innerHTML = obj_arr[0].Degree;
+                }
+                else
+                {
+                    console.log("No connection");
+                }
+            };
+            xmlhttp.open("GET", "http://fastcare123.com/api/doctors/list", true);
+            xmlhttp.send();
+        }
+    </script>
+</body>
+
+</html>
+
+
